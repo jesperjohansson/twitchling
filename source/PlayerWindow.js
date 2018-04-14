@@ -40,24 +40,15 @@ module.exports = class PlayerWindow {
 
   events() {
     // prettier-ignore
-    ioHook.addListener('keydown', ({ keycode }) => keycode === KEY && this.toggleMouseListener(true))
-    ioHook.addListener('keyup', ({ keycode }) => keycode === KEY && this.toggleMouseListener(false))
+    ioHook.addListener('keydown', ({ keycode }) => keycode === KEY && this.setEnabled(true))
+    ioHook.addListener('keyup', ({ keycode }) => keycode === KEY && this.setEnabled(false))
+    ioHook.addListener('mousemove', this.handleMouseMoveListener)
     ioHook.start()
   }
 
-  toggleMouseListener(toggle) {
-    if (toggle) {
-      this.bounds = this.browserWindow.getBounds()
-      ioHook.addListener('mousemove', this.handleMouseMoveListener)
-    } else {
-      ioHook.removeListener('mousemove', this.handleMouseMoveListener)
-      this.setEnabled(false)
-    }
-  }
-
   handleMouseMove(e) {
-    const pointerInBounds = inRectangle(e, this.bounds)
-    this.setEnabled(pointerInBounds)
+    const pointerInBounds = inRectangle(e, this.browserWindow.getBounds())
+    this.browserWindow.setOpacity(pointerInBounds && !this.isEnabled ? 0 : 1)
   }
 
   setEnabled(isEnabled) {
@@ -65,6 +56,5 @@ module.exports = class PlayerWindow {
     this.isEnabled = isEnabled
     this.browserWindow.webContents.send('playerWindowEnable', isEnabled)
     this.browserWindow.setIgnoreMouseEvents(!isEnabled)
-    this.browserWindow.setOpacity(isEnabled ? 1 : 0.5)
   }
 }

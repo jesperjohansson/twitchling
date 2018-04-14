@@ -1,6 +1,8 @@
 const Store = require('electron').remote.getGlobal('Store')
 const PlayerWindow = require('./PlayerWindow')
 
+// TODO: Keybindings, opacity settings
+
 module.exports = new class Prompt {
   constructor() {
     this.dom()
