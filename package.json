@@ -1,0 +1,29 @@
+{
+  "name": "twitchling",
+  "version": "0.0.1",
+  "description": "Twitch player that stays on top but lets you click through it",
+  "main": "index.js",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesperjohansson/twitchling.git"
+  },
+  "author": "Jesper Johansson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesperjohansson/twitchling/issues"
+  },
+  "homepage": "https://github.com/jesperjohansson/twitchling#readme",
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "prettier": "^1.12.0"
+  }
+}
