@@ -34,9 +34,10 @@ img {
 }
 
 form {
-  padding-top: 3rem;
   display: flex;
   justify-content: center;
+  margin-bottom: 1.2rem;
+  padding-top: 3rem;
   width: 100%;
   flex-wrap: wrap;
 }
@@ -54,7 +55,7 @@ button {
 }
 
 input {
-  width: 24rem;
+  flex-grow: 1;
   margin-right: 0.4rem;
 
   &:focus {
@@ -73,10 +74,44 @@ button {
   }
 }
 
+ul,
+li {
+  all: unset;
+  padding: 0;
+  margin: 0;
+}
+
 .error {
+  padding-top: 0.6rem;
   display: none;
 
   &.-visible {
     display: block;
+  }
+}
+
+.list {
+  display: none;
+  width: 100%;
+  max-height: 16rem;
+  overflow-y: scroll;
+
+  &.-visible {
+    display: block;
+  }
+
+  & li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+    width: 100%;
+  }
+
+  & span {
+    display: inline-block;
+    max-width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }

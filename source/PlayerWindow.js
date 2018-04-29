@@ -25,7 +25,6 @@ module.exports = class PlayerWindow {
       skipTaskbar: true,
     })
 
-    this.handleMouseMoveListener = this.handleMouseMove.bind(this)
     this.setEnabled(false)
     this.events()
     this.browserWindow.loadURL(url.format({
@@ -38,10 +37,22 @@ module.exports = class PlayerWindow {
 
   events() {
     // prettier-ignore
-    ioHook.addListener('keydown', ({ keycode }) => keycode === KEY && this.setEnabled(true))
-    ioHook.addListener('keyup', ({ keycode }) => keycode === KEY && this.setEnabled(false))
+    this.handleMouseMoveListener = this.handleMouseMove.bind(this)
+    this.handleKeyDownListener = this.handleKeyDown.bind(this)
+    this.handleKeyUpListener = this.handleKeyUp.bind(this)
+
+    ioHook.addListener('keydown', this.handleKeyDownListener)
+    ioHook.addListener('keyup', this.handleKeyUpListener)
     ioHook.addListener('mousemove', this.handleMouseMoveListener)
     ioHook.start()
+  }
+
+  handleKeyDown({ keycode }) {
+    if (keycode === KEY) this.setEnabled(true)
+  }
+
+  handleKeyUp({ keycode }) {
+    if (keycode === KEY) this.setEnabled(false)
   }
 
   handleMouseMove(e) {
@@ -54,5 +65,12 @@ module.exports = class PlayerWindow {
     this.isEnabled = isEnabled
     this.browserWindow.webContents.send('playerWindowEnable', isEnabled)
     this.browserWindow.setIgnoreMouseEvents(!isEnabled)
+  }
+
+  destroy() {
+    ioHook.removeListener('keydown', this.handleKeyDownListener)
+    ioHook.removeListener('keyup', this.handleKeyUpListener)
+    ioHook.removeListener('mousemove', this.handleMouseMoveListener)
+    this.browserWindow.close()
   }
 }
