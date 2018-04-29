@@ -1,4 +1,5 @@
 const Store = require('electron').remote.getGlobal('Store')
+const { app } = require('electron').remote
 const PlayerWindow = require('./PlayerWindow')
 
 // TODO: Keybindings, opacity settings
@@ -38,11 +39,13 @@ module.exports = new class Prompt {
     this.input = document.querySelector('input')
     this.error = document.querySelector('.error')
     this.list = document.querySelector('.list')
+    this.quit = document.querySelector('.quit')
   }
 
   events() {
     this.form.addEventListener('submit', this.handleFormSubmit.bind(this))
     this.list.addEventListener('click', this.handleListClick.bind(this))
+    this.quit.addEventListener('click', () => app.quit())
   }
 
   handleFormSubmit(e) {
