@@ -25,8 +25,6 @@ module.exports = class PlayerWindow {
       skipTaskbar: true,
     })
 
-    // this.browserWindow.webContents.openDevTools() // DEV
-
     this.handleMouseMoveListener = this.handleMouseMove.bind(this)
     this.setEnabled(false)
     this.events()
@@ -48,7 +46,7 @@ module.exports = class PlayerWindow {
 
   handleMouseMove(e) {
     const pointerInBounds = inRectangle(e, this.browserWindow.getBounds())
-    this.browserWindow.setOpacity(pointerInBounds && !this.isEnabled ? 0 : 1)
+    this.browserWindow.setOpacity(pointerInBounds && !this.isEnabled ? 0.25 : 1)
   }
 
   setEnabled(isEnabled) {

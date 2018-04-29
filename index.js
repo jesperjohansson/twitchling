@@ -1,36 +1,13 @@
-const path = require('path')
-const url = require('url')
-const electron = require('electron')
+const menubar = require('menubar')
 const Store = require('./source/Store')
-
-const { app, BrowserWindow } = electron
-let mainWindow
 
 global.Store = Store
 
-function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 550,
-    height: 300,
-  })
-
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true,
-  }))
-
-  // mainWindow.webContents.openDevTools() // DEV
-
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
-}
-
-app.on('ready', createWindow)
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit()
+const mb = menubar({
+  backgroundColor: '#302C33',
+  alwaysOnTop: true,
 })
-app.on('activate', () => {
-  if (mainWindow === null) createWindow()
+mb.on('ready', () => mb.showWindow())
+mb.on('after-create-window', () => {
+  mb.window.openDevTools()
 })

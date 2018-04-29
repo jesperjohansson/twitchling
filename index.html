@@ -8,9 +8,14 @@
   <title>Twitchling</title>
 </head>
 <body>
-  Hello world
-  <input type="text" value="https://player.twitch.tv/?volume=1&!muted&channel=lirik">
-  <button type="button">Submit</button>
+  <figure>
+    <img src="images/twitchling.svg" alt="Twitchling logo">
+  </figure>
+  <form action="#" method="post">
+    <input type="text" placeholder="Channel name or link" autofocus>
+    <button type="submit">Stream</button>
+    <span class="error"></span>
+  </form>
   <script>
     require('./source/Prompt.js')
   </script>
