@@ -96,6 +96,10 @@ li {
   max-height: 16rem;
   overflow-y: scroll;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   &.-visible {
     display: block;
   }
