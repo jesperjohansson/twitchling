@@ -10,7 +10,7 @@
     "installer-mac": "yarn electron-installer-dmg ./dist/Twitchling-darwin-x64/Twitchling.app Twitchling --out=./dist/ --overwrite --icon=./twitchling.icns --background=./images/dmg-background.png",
     "installer-windows": "node buildWin.js",
     "dev": "yarn sass-watch | yarn electron",
-    "build": "electron-packager . --out dist/ --icon twitchling --platform darwin,win32 --arch x64,ia32 --overwrite",
+    "build": "electron-packager . --out dist/ --icon twitchling --platform darwin,win32 --arch x64 --overwrite",
     "dist": "rm -rf dist/ && mkdir dist && yarn build && yarn installer-mac && yarn installer-windows"
   },
   "repository": {
@@ -52,8 +52,7 @@
       "win32"
     ],
     "arches": [
-      "x64",
-      "ia32"
+      "x64"
     ]
   },
   "productName": "Twitchling"
