@@ -2,9 +2,7 @@
 const { app } = require('electron')
 
 function handleSquirrelEvent() {
-  if (process.argv.length === 1) {
-    return false
-  }
+  if (process.argv.length === 1) return false
 
   const ChildProcess = require('child_process')
   const path = require('path')
